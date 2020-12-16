@@ -29,7 +29,8 @@ app.get("/api/timestamp/:date?", function(req, res){
   if (req.params.date == null){
     date = new Date();
   } else {
-    date = new Date(req.params.date);
+    date = !isNaN(req.params.date) ? new Date(parseInt(req.params.date)) : new Date(req.params.date);
+    console.log(date);
     if (date == null){
       res.json({error: "Invalid Date"});
       return;
